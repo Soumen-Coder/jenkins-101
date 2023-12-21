@@ -21,6 +21,8 @@ pipeline {
                 echo "Testing the app"
                 sh '''
                 cd my-python-app
+                python3 -m venv .venv
+                source .venv/bin/activate
                 python3 hello.py
                 python3 hello.py --name=spider-man
                 '''
