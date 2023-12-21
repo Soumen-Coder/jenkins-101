@@ -1,31 +1,34 @@
 pipeline {
     agent {
         node {
-            label 'docker-agent-alpine'
+            label 'docker-agent-alpine-python'
             }
       }
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
+                echo "Building the app"
                 sh '''
-                echo "Building stuff"
+                cd my-python-app
+                pip install -r requirements.txt
                 '''
             }
         }
         stage('Test') {
             steps {
-                echo "Testing.."
+                echo "Testing the app"
                 sh '''
-                echo "Testing stuff"
+                cd my-python-app
+                python3 hello.py
+                python3 hello.py --name=spider-man
                 '''
             }
         }
         stage('Deliver') {
             steps {
-                echo 'Deliver....'
+                echo 'Deliver the app'
                 sh '''
-                echo "Delivering stuff"
+                echo "Delivering application"
                 '''
             }
         }
